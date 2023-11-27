@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CompareWhat</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="my-4">CompareWhat</h2>
+        <form id="productForm" method="POST">
+            <div id="productContainer" class="row">
+                {% for product in products %}
+                    <div class="col-md-4">
+                        <div class="card my-2">
+                            <div class="card-body">
+                                <h5 class="card-title">Produit {{ product.id }}</h5>
+                                <input type="text" class="form-control my-2" name="productPrice{{ product.id }}" placeholder="Prix de vente" value="{{ product['Prix de vente'] }}">
+                                <input type="text" class="form-control my-2" name="productConsumption{{ product.id }}" placeholder="Consommation (kWh/annum)" value="{{ product['Consommation (kWh/annum)'] }}">
+                                {% if product.id > 2 %}
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="removeProduct(this)">Supprimer</button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            
+            <button type="button" class="btn btn-primary my-2" id="addProduct">Ajouter un Produit</button>
+            <button type="submit" class="btn btn-success my-2">Comparer</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        function addProduct(isRemovable) {
+            var productContainer = document.getElementById('productContainer');
+            var productNumber = productContainer.children.length + 1;
+
+            if (productNumber > 5) {
+                alert('Nombre maximum de produits atteint.');
+                return;
+            }
+
+            var newProduct = document.createElement('div');
+            newProduct.className = 'col-md-4';
+            newProduct.innerHTML = `
+                <div class="card my-2">
+                    <div class="card-body">
+                        <h5 class="card-title">Produit ${productNumber}</h5>
+                        <input type="text" class="form-control my-2" name="productPrice${productNumber}" placeholder="Prix de vente">
+                        <input type="text" class="form-control my-2" name="productConsumption${productNumber}" placeholder="Consommation (kWh/annum)">
+                        ${isRemovable ? '<button type="button" class="btn btn-danger btn-sm" onclick="removeProduct(this)">Supprimer</button>' : ''}
+                    </div>
+                </div>
+            `;
+
+            productContainer.appendChild(newProduct);
+        }
+
+        function removeProduct(button) {
+            var productContainer = document.getElementById('productContainer');
+            productContainer.removeChild(button.closest('.col-md-4'));
+        }
+
+        document.getElementById('addProduct').addEventListener('click', function () {
+            addProduct(true);
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var productContainer = document.getElementById('productContainer');
+            if (productContainer.children.length === 0) {
+                // Initialiser avec deux produits non-supprimables si aucun produit n'est présent
+                addProduct(false);
+                addProduct(false);
+            }
+        });
+
+    </script>
+</body>
+
+</html>
