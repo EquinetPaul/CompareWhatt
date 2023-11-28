@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CompareWhat</title>
+    <title>CompareWhatt</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 
 <body>
     <div class="container">
-        <h2 class="my-4">CompareWhat</h2>
+        <h2 class="my-4">CompareWhatt</h2>
         <form id="productForm" method="POST">
             <div id="productContainer" class="row">
                 {% for product in products %}
@@ -28,10 +29,17 @@
                     </div>
                 {% endfor %}
             </div>
+            <div id="productContainer" class="row">
+                <h5 class="card-title">Produit {{ product.id }}</h5>
+                <input type="text" class="form-control my-2" name="electricity_price" placeholder="Prix de vente" value="{{ electricity_price }}">
+            </div>
             
             <button type="button" class="btn btn-primary my-2" id="addProduct">Ajouter un Produit</button>
             <button type="submit" class="btn btn-success my-2">Comparer</button>
         </form>
+
+        <div id="plotly-chart"></div>
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -80,8 +88,13 @@
                 addProduct(false);
             }
         });
-
     </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var chartData = {{ chart_data|safe }};
+        Plotly.newPlot('plotly-chart', chartData.data, chartData.layout);
+    });
+</script>
 </body>
 
 </html>
