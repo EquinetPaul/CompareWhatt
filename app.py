@@ -6,6 +6,10 @@ import json
 import plotly
 import plotly.graph_objs as go
 
+# https://www.electrodepot.fr/refrigerateur-2-portes-high-one-2d-206-f-w742c-206l-blanc.html
+# https://www.electrodepot.fr/refrigerateur-combine-valberg-cs-311-d-x625c.html
+# https://www.electrodepot.fr/refrigerateur-combine-daewoo-ckm0379cana0.html
+
 app = Flask(__name__)
 
 def projection(df : pd.DataFrame, electricity_price):
@@ -38,7 +42,6 @@ def transform_projection(df: pd.DataFrame):
         product_data = {
             'label': f'Produit {product_id}',
             'data': group[['Date', 'Total_Price']].to_dict('records'),
-            # Ajoutez d'autres options de style si nécessaire
         }
         data.append(product_data)
 
@@ -78,6 +81,7 @@ def index():
     products_data = []
     if request.method == 'POST':
         electricity_price = request.form.get("electricity_price")
+        theorical_evolution = request.form.get("theorical_evolution")
         for i in range(1, 6):
             product_price = request.form.get(f'productPrice{i}')
             product_consumption = request.form.get(f'productConsumption{i}')
@@ -96,9 +100,9 @@ def index():
         projection_to_template = transform_projection_plotly(projection_df)
 
 
-        return render_template('index.html', products=products_data, electricity_price=electricity_price,  chart_data=projection_to_template)
+        return render_template('index.html', products=products_data, electricity_price=electricity_price, theorical_evolution=theorical_evolution, chart_data=projection_to_template)
 
-    return render_template('index.html', products=products_data,electricity_price=electricity_price)
+    return render_template('index.html', products=products_data, electricity_price=0.16, theorical_evolution=0.008236)
 
 if __name__ == '__main__':
     app.run(debug=True)
