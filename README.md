@@ -8,9 +8,11 @@ Additionally, certain additional parameters allow setting important factors such
 Information about products (purchase price and electricity consumption) can always be found on product datasheets online or in-store (in EU btw).
 
 ### Run the code
-  - pip install -r requirements.txt
-  - python app.py
-  - http://127.0.0.1:5000/
+```python
+pip install -r requirements.txt
+python app.py
+http://127.0.0.1:5000/
+```
 
 ### Limitations
 
