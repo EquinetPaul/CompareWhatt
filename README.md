@@ -7,6 +7,11 @@ Additionally, certain additional parameters allow setting important factors such
 
 Information about products (purchase price and electricity consumption) can always be found on product datasheets online or in-store (in EU btw).
 
+### Run the code
+  pip install -r requirements.txt
+  python app.py
+  http://127.0.0.1:5000/
+
 ### Limitations
 
 - The unit of electrical consumption used is: kWh/annum, which corresponds to the number of kWh consumed over a year for continuous use.
