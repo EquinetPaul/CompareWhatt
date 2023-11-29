@@ -5,7 +5,7 @@ To conduct this comparison, the web application allows users to fill out a form 
 
 Additionally, certain additional parameters allow setting important factors such as the price of electricity per kWh and its theoretical annual evolution.
 
-Information about products (purchase price and electricity consumption) can always be found on product datasheets online or in-store.
+Information about products (purchase price and electricity consumption) can always be found on product datasheets online or in-store (in EU btw).
 
 ### Limitations
 
@@ -18,6 +18,16 @@ Information about products (purchase price and electricity consumption) can alwa
 
 ### To Do
 - Allow the choice of the unit of electrical consumption.
+
+### Screenshots
+
+Screenshots demonstrate the use of the tool on three household appliances:
+
+| Name      | Purchase Price | kWh/year |
+|-----------|----------------|----------|
+| Product 1 | 189            | 215      |
+| Product 2 | 339            | 187      |
+| Product 3 | 499            | 153      |
 
 ![img1](https://github.com/EquinetPaul/CompareWhatt/blob/main/static/images/img1.PNG?raw=true)
 ![img2](https://github.com/EquinetPaul/CompareWhatt/blob/main/static/images/img2.PNG?raw=true)
