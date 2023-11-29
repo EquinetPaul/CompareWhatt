@@ -18,6 +18,7 @@ Information about products (purchase price and electricity consumption) can alwa
 
 ### To Do
 - Allow the choice of the unit of electrical consumption.
+- Find the point of intersection.
 
 ### Screenshots
 
